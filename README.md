@@ -82,3 +82,22 @@ JPA를 사용함으로서 다음과 같은 성능 최적화가 된다.
   - 지연 로딩은 객체가 실제 사용될 때 로딩
   - 즉시 로딩은 JOIN SQL로 한 번에 연관된 객체끼리 미리 조회한다
 
+# hibernate
+
+- JPA는 Interface이다
+- hibernate는 JPA의 구현체로 사용되는 것
+
+# 데이터베이스 방언
+
+- JPA는 특정 데이터베이스에 종속되지 않는다
+- 각각의 데이터베이스가 제공하는 SQL 문법과 함수는 조금씩 다르다
+  - 가변 문자 : MySQL은 VARCHAR, Oracle은 VARCHAR2
+  - 페이징 : MySQL은 LIMIT, Oracle은 ROWNUM
+- 방언 : SQL 표준을 따르지 않는 특정 데이터베이스만의 고유한 기능
+
+<img width="534" alt="Screen Shot 2022-08-24 at 5 53 26 PM" src="https://user-images.githubusercontent.com/73376468/186376503-e9b1c7a5-d426-4b4e-93c1-fc08296f727d.png">
+
+- 강의는 h2 데이터베이스를 사용하므로 hibernate.dialect의 value 값으로 `org.hiberante.dialect.H2Dialect` 를 사용하겠다고 명시
+- 속성의 `javax` 와 `hibernate` 차이
+  - javax는 hibernate 라이브러리가 아닌 다른 JPA 구현 라이브러리를 사용해도 그대로 적용이 됨
+  - `hibernate`가 붙은 것은 hibernate 전용 옵션이라고 보면 됨
