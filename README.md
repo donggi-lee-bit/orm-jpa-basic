@@ -101,3 +101,18 @@ JPA를 사용함으로서 다음과 같은 성능 최적화가 된다.
 - 속성의 `javax` 와 `hibernate` 차이
   - javax는 hibernate 라이브러리가 아닌 다른 JPA 구현 라이브러리를 사용해도 그대로 적용이 됨
   - `hibernate`가 붙은 것은 hibernate 전용 옵션이라고 보면 됨
+
+# 매핑 정보를 통한 JPA의 동작
+
+- `EntityManagerFactory`는 애플리케이션 로딩 시점에 하나만 만들어야한다.
+- 일괄적인 트랜잭션 단위의 작업을 할 때 `EntityManager`를 꼭 만들어야 한다.
+- JPA에서는 데이터를 변경하는 작업을 트랜잭션안에서 해야한다.
+
+### EntityManager의 transaction
+
+- JPA에서 데이터를 저장, 변경하는 작업을 트랜잭션 안에서 하기 위해 트랜잭션을 가져온다
+  - `EntityTransaction tx = em.getTransaction();`
+- 트랜잭션을 가져온다고 범위 내에 있는 게 아니기 때문에 `begin()` 메서드로 트랜잭션의 시작을 알린다.
+- 작업을 수행하고
+- `persist()` 메서드로 해당 작업을 영속성 컨텍스트에 저장한다.
+- `commit()`으로 커밋하거나, 해당 작업을 되돌리겠다면 `rollback()` 메서드를 호출한다.
