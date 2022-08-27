@@ -131,9 +131,18 @@ JPA를 사용함으로서 다음과 같은 성능 최적화가 된다.
 ## JPQL이란
 
 - `Java Persistence Query Language`를 말한다.
-- `JPA` 명세에 지정되어 있다
+- `JPA` 가 `SQL`을 추상화한 `JQPL`이라는 객체 지향 쿼리 언어 제공
 - 관계형 데이터베이스에 사용될 `query`를 만든다
 - `SQL` 문법 베이스로 개발되었다
 - `SELECT` 절을 사용하여 정보 또는 데이터를 검색하고, `UPDATE` 절과 `DELETE` 절을 사용하여 대량 업데이트를 수행할 수 있다
 - `EntityManager.createQuery()`를 사용하여 동작한다
+- `JPQL`은 `entity 객체`를 대상으로 쿼리
+- `SQL`은 `데이터베이스 테이블`을 대상으로 쿼리
 
+**JPQL로 짜여진 query는 JPA 입장에서 table이 아닌 객체를 대상으로 query를 날린다**
+
+## JPQL의 장점
+
+### Paging 처리가 가능하다
+
+- `setFirstResult()` `setMaxResults()` 메서드를 사용하여 `paging` 처리를 할 수 있다
