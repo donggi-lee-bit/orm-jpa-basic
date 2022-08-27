@@ -125,3 +125,15 @@ JPA를 사용함으로서 다음과 같은 성능 최적화가 된다.
 - JPA를 통해 `Entity`를 가져오면, JPA가 해당 `Entity`를 관리한다
 - 데이터의 변경이 있었는지 `commit`하는 시점에서 JPA가 확인한다
   - 변경이 있으면 `commit` 하기 직전 `update query`를 날린다
+
+# JPQL
+
+## JPQL이란
+
+- `Java Persistence Query Language`를 말한다.
+- `JPA` 명세에 지정되어 있다
+- 관계형 데이터베이스에 사용될 `query`를 만든다
+- `SQL` 문법 베이스로 개발되었다
+- `SELECT` 절을 사용하여 정보 또는 데이터를 검색하고, `UPDATE` 절과 `DELETE` 절을 사용하여 대량 업데이트를 수행할 수 있다
+- `EntityManager.createQuery()`를 사용하여 동작한다
+
