@@ -3,15 +3,12 @@ package hellojpa;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 
 @Entity
-@SequenceGenerator(name = "member_seq_generator", sequenceName = "member_seq")
 public class Member {
 
-	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_generator")
+	@Id @GeneratedValue
 	private Long id;
 
 	@Column(name = "name", nullable = false)

@@ -11,14 +11,16 @@ public class JpaMain {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
-
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setUsername("helloB");
-            em.persist(member);
+            Member findMember = em.find(Member.class, 3L);
+            findMember.setUsername("modified username");
+            System.out.println("findMember.name = " + findMember.getUsername());
+            System.out.println("findMember.id = " + findMember.getId());
+
             tx.commit();
+
         } catch (Exception e) {
             tx.rollback();
         } finally {
