@@ -42,3 +42,28 @@
 - 스테이징과 운영 서버는 `validate` 또는 `none`
 
 **local에서만 자유롭게 하고 여러 명이 쓰는 개발 서버나 스테이징에서는 가급적 스키마 자동 생성을 사용하지 않는다**
+
+# 필드와 컬럼 매핑
+
+## @Enumerated, @Temporal, @Lob, @Transient
+
+- @Enumerated : 데이터베이스에는 `enum` 타입이 없는데 그 때 @Enumerated 어노테이션을 사용해서 enum처럼 사용한다
+    - 주의사항 : `ORDINAL`은 enum 순서를 DB에 저장, `STRING`은 enum 이름을 DB에 저장한다 (기본 값은 `ORDINAL`)
+    - enum에 값이 추가되었을 때 `ORDINAL`은 enum 순서대로 DB에 저장하기 때문에 기존에 저장하던 순서와 달리 저장하게 되면 다른 enum임에도 순서로 인해 같은 숫자가 저장될 수 있다.
+- @Temporal : 날짜 데이터를 DB에 넣을 때 사용한다
+- @Lob : `varchar`를 넘어서는 큰 컨텐츠를 넣고 싶을 때 사용한다
+    - 매핑하는 필드 타입이 문자면 `CLOB`으로 매핑, 나머지는 `BLOB`으로 매핑된다
+- @Transient : DB에 넣고싶지 않아 객체 매핑을 하고 싶지 않을 때 사용한다
+
+## 기본 키 매핑
+
+- 직접 할당 : `@Id` 사용
+- 자동 생성 : `@GeneratedValue`
+    - `AUTO` : 데이터베이스 방언에 따라 자동 지정, strategy 설정 안할 시 기본값
+    - `IDENTITY` : 데이터베이스에 위임, MySQL 사용 시
+    - `SEQUENCE` : 데이터베이스 시퀀스 오브젝트 사용, ORACLE DB 사용 시
+        - `@SequenceGenerator`를 사용하여 시퀀스 설정해줄 수 있음
+    - `TABLE` : 키 생성용 테이블 사용, 모든 DB에서 사용
+        - 데이터베이스 시퀀스를 흉내낸다
+        - 최적화가 되어있지 않기 때문에 성능이 떨어진다는 단점이 있다.
+        - `@TableGenerator`
