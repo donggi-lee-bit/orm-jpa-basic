@@ -1,6 +1,5 @@
 package hellojpa;
 
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -15,14 +14,7 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setUsername("userA");
-            member.setRoleType(RoleType.USER);
-
-            em.persist(member);
-
             tx.commit();
-
         } catch (Exception e) {
             tx.rollback();
         } finally {
